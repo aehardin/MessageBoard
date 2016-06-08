@@ -22,8 +22,22 @@ if(isset($_POST['create'])){
 	$user->first = $_POST['first'];
 	$user->last = $_POST['last'];
 	$user->password = sha1($_POST['password']);
-	$user->admin = $_POST['admin'];
-	$user->readonly = $_POST['readonly'];
+	if(isset($_POST['admin'])){
+		if($_POST['admin'] == 1){
+			$user->admin = $_POST['admin'];
+		}
+	}
+	else{
+		$user->admin = 0;
+	}
+	if(isset($_POST['readonly'])){
+		if($_POST['readonly'] == 1){
+			$user->readonly = $_POST['readonly'];
+		}
+	}
+	else{
+		$user->readonly = 0;
+	}
 	R::store( $user );
 	header ("Location: http://messageboard.hardinresources.com/index.php");
 }
@@ -38,8 +52,22 @@ if(isset($_POST['update'])){
 	if($user->last == sha1($_POST['old_password'])){
 		$user->password = sha1($_POST['new_password']);
 	}
-	$user->admin = $_POST['admin'];
-	$user->readonly = $_POST['readonly'];
+	if(isset($_POST['admin'])){
+		if($_POST['admin'] == 1){
+			$user->admin = $_POST['admin'];
+		}
+	}
+	else{
+		$user->admin = 0;
+	}
+	if(isset($_POST['readonly'])){
+		if($_POST['readonly'] == 1){
+			$user->readonly = $_POST['readonly'];
+		}
+	}
+	else{
+		$user->readonly = 0;
+	}
 	R::store( $user );
 	header ("Location: http://messageboard.hardinresources.com/index.php");	
 }

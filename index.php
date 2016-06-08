@@ -20,7 +20,7 @@ catch(Exception $e){
 }
 
 Authenticate::isLoggedIn();
-$user  = R::find( 'users', ' id = '.$_SESSION['login']);
+$user  = R::findOne( 'users', ' id = '.$_SESSION['login']);
 Menu::getMenu($user);
 echo "<br>";
 echo "<br>";
@@ -35,7 +35,7 @@ foreach($categories as $c){
 	$urlVar = "catId=".$c->id;
 	echo '<a href="../categories.php?'.$urlVar.'">'.$c->name.'</a>';
 	
-	if($user[1]->admin == '1'){
+	if($user->admin == '1'){
 		echo ' | <a href="app/protected/categories/update.php?'.$urlVar.'">Update</a>';
 		echo ' | <a href="app/protected/categories/delete.php?'.$urlVar.'">Delete</a>';
 	}
@@ -50,6 +50,6 @@ foreach($categories as $c){
 <hr>
 <?php
 
-if($user[1]->admin == '1'){
+if($user->admin == '1'){
 	echo '<a href="app/protected/categories/create.php">Create New Category</a>';
 }

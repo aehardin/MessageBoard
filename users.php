@@ -22,6 +22,7 @@ catch(Exception $e){
 Authenticate::isLoggedIn();
 
 $user  = R::findOne( 'users', ' id = '.$_SESSION['login']);
+
 Menu::getMenu($user);
 echo "<br>";
 echo "<br>";
@@ -34,7 +35,7 @@ echo "<br>";
 echo "<br>";
 
 
-if($user[1]->admin == '1' || $user[1]->readonly == '0'){
+if($user->admin == '1' || $user->readonly == '0'){
 echo "<h3>Users</h3>";
 echo "<br>";
 }
@@ -42,7 +43,7 @@ $users = R::findAll( 'users' );
 
 foreach($users as $u){
 	$urlVar = "userId=" .$u->id;
-	if($user[1]->admin == '1' || $user[1]->readonly == '0'){
+	if($user->admin == '1' || $user->readonly == '0'){
 		echo $u->username. ' | <a href="app/protected/users/update.php?'.$urlVar.'">Update</a>';
 		echo ' | <a href="app/protected/users/delete.php?'.$urlVar.'">Delete</a>';
 	}
@@ -57,6 +58,6 @@ foreach($users as $u){
 <hr>
 <?php
 
-if($user[1]->admin == '1' || $user[1]->readonly == '0'){
+if($user->admin == '1' || $user->readonly == '0'){
 	echo '<a href="app/protected/users/create.php">Create New User</a>';
 }

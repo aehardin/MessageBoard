@@ -20,6 +20,7 @@ if(isset($_POST['create'])){
 	$post->title = $_POST['title'];
 	$post->description = $_POST['description'];
 	$post->threads_id = $_POST['threads_id'];
+	$post->users_id = $_SESSION['login'];
 	R::store( $post );
 	header ("Location: http://messageboard.hardinresources.com/index.php");
 }
@@ -34,7 +35,7 @@ if(isset($_POST['update'])){
 }
 
 if(isset($_POST['delete'])){
-	$postId = $_POST['pstId'];
+	$postId = $_POST['posts_id'];
 	$post = R::load( 'posts', $postId );
 	
 	R::trash( $post ); 

@@ -21,7 +21,7 @@ catch(Exception $e){
 
 Authenticate::isLoggedIn();
 
-$user  = R::find( 'users', ' id = '.$_SESSION['login']);
+$user  = R::findOne( 'users', ' id = '.$_SESSION['login']);
 Menu::getMenu($user);
 echo "<br>";
 echo "<br>";
@@ -46,7 +46,8 @@ $posts = R::find('posts', ' threads_id = ? ', [$thrId]);
 foreach($posts as $p){
 	$urlVar = "thrId=" .$thrId. "&pstId=" .$p->id;
 	echo '<h5>' .$p->title. '</h5>';
-	if($user[1]->admin == '1' || $user[1]->readonly == '0'){
+	//if read only and is the users post updaate and delete
+	if($user->admin == '1' || ($user->readonly == '0' && $p->users_id == $user->id)){
 		echo ' | <a href="app/protected/posts/update.php?'.$urlVar.'">Update</a>';
 		echo ' | <a href="app/protected/posts/delete.php?'.$urlVar.'">Delete</a>';
 	}
@@ -62,6 +63,6 @@ foreach($posts as $p){
 <hr>
 <?php
 
-if($user[1]->admin == '1' || $user[1]->readonly == '0'){
+if($user->admin == '1' || $user->readonly == '0'){
 	echo '<a href="app/protected/posts/create.php?thrId=' .$thrId. '">Create New Post</a>';
 }

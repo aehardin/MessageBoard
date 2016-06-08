@@ -19,6 +19,7 @@ if(isset($_POST['create'])){
 	$category = R::dispense( 'categories' );
 	$category->name = $_POST['name'];
     $category->description = $_POST['description'];
+	$category->users_id = $_SESSION['login'];
 	R::store( $category );
 	header ("Location: http://messageboard.hardinresources.com/index.php");
 }

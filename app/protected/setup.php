@@ -38,6 +38,7 @@ $users->readonly = false;
 $categories = R::dispense('categories');
 $categories->name = "Category1";
 $categories->description = "This is the first category.";
+$users->ownCategoriesList[] = $categories;
 
 
 //threads
@@ -45,6 +46,7 @@ $threads = R::dispense('threads');
 $threads->title = "Thread1";
 $threads->subtitle = "This is the first thread for category1";
 $categories->ownThreadsList[] = $threads;
+$users->ownThreadsList[] = $threads;
 
 
 
@@ -56,6 +58,8 @@ $posts2 = R::dispense('posts');
 $posts2->title = "Post2";
 $posts2->description = "This is the second post thread1";
 
+$users->ownPostsList[] = $posts1;
+$users->ownPostsList[] = $posts2;
 $threads->ownPostsList[] = $posts1;
 $threads->ownPostsList[] = $posts2;
 

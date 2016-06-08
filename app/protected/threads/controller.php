@@ -20,6 +20,7 @@ if(isset($_POST['create'])){
 	$thread->title = $_POST['title'];
 	$thread->subtitle = $_POST['subtitle'];
 	$thread->categories_id = $_POST['categories_id'];
+	$thread->users_id = $_SESSION['login'];
 	R::store( $thread );
 	header ("Location: http://messageboard.hardinresources.com/index.php");
 }
